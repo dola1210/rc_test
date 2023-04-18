@@ -7,7 +7,7 @@ $(function () {
     }
     
     function Keypad1(){
-        return input;
+
     }
 
     function ida_init () {
