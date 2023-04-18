@@ -1,6 +1,7 @@
 let device_id = null;
 let _ENDPOINT =  'https://2.iottalk.tw';
-let password = ''
+let password = '';
+
 
 function set_device_id(d_id){
     device_id = d_id;

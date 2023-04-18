@@ -151,7 +151,7 @@ var dan = (function () {
             push_idf(index + 1);
             return;
         }
-        _push(_idf_list[index]);
+        //_push(_idf_list[index]);
         setTimeout(push_idf, POLLING_INTERVAL, index + 1);
     }	
 	
