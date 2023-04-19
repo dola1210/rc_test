@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test rc</title>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/csmapi.js"></script>
+    <script src="js/Switch.js"></script>
+</head>
+
+<script>
+    set_device_id('RC_029');
+    load_alias('RC_029', 'Keypad', 1);
+    function pushinput(i){
+      csmapi.push('rc029','Keypad1',[i]);
+    }
+</script> 
+
+<body>
+    <h1>RC029</h1>
+    
+    <div class="container-fluid">
+        <legend class="text-primary Keypad1 h2">Keypad1</legend>
+          <button type="button" class="btn btn-default" onclick="pushinput(1)" style="color:black; font-size: 110%;">1</button>
+          <button type="button" class="btn btn-default" onclick="pushinput(2)" style="color:black; font-size: 110%;">2</button>
+          <button type="button" class="btn btn-default" onclick="pushinput(3)" style="color:black; font-size: 110%;">3</button>  
+          <button type="button" class="btn btn-default" onclick="pushinput(4)" style="color:black; font-size: 110%;">4</button>
+          <button type="button" class="btn btn-default" onclick="pushinput(5)" style="color:black; font-size: 110%;">5</button><br>
+          <button type="button" class="btn btn-default" onclick="pushinput(6)" style="color:black; font-size: 110%;">6</button> 
+          <button type="button" class="btn btn-default" onclick="pushinput(7)" style="color:black; font-size: 110%;">7</button>
+          <button type="button" class="btn btn-default" onclick="pushinput(8)" style="color:black; font-size: 110%;">8</button>
+          <button type="button" class="btn btn-default" onclick="pushinput(9)" style="color:black; font-size: 110%;">9</button> 
+          <button type="button" class="btn btn-default" onclick="pushinput(0)" style="color:black; font-size: 110%;">0</button>
+    </div>
+    <script>
+
+      // 初始化
+      csmapi.set_endpoint('https://6.iottalk.tw');
+      
+    </script>
+</body>
+</html>

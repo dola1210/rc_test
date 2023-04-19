@@ -72,7 +72,7 @@ var csmapi = (function () {
             if (callback) {
                 callback(true);
             }
-            console.log("push"+data);
+            console.log("push "+data);
         }).fail(function () {
             if (callback) {
                 callback(false);
