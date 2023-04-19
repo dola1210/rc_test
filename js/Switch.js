@@ -1,5 +1,5 @@
 let device_id = null;
-let _ENDPOINT =  'https://2.iottalk.tw';
+let _ENDPOINT =  'https://6.iottalk.tw';
 let password = '';
 
 
