@@ -78,6 +78,7 @@
 
             // 取得score數值
             const scoreElement = document.getElementById("score").value;
+            var score = parseFloat(scoreElement);
 
             // 呼叫 csmapi.js 的 push 函式
             csmapi.push(mac_addr, idf_name, [scoreElement], function(data, error) {
