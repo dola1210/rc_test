@@ -37,15 +37,10 @@
 
     let acceleration = { x: 0, y: 0, z: 0 };
 
-    function handleDeviceMotion(event) {
-        // acceleration.x = event.acceleration.x;
-        // acceleration.y = event.acceleration.y;
-        // acceleration.z = event.acceleration.z;
-
+    function handleDeviceMotion(event) {        
         acceleration.x = event.accelerationIncludingGravity.x;
         acceleration.y = event.accelerationIncludingGravity.y;
         acceleration.z = event.accelerationIncludingGravity.z;
-
 
         var accelerationX = document.getElementById("accelerationX"),
             accelerationY = document.getElementById("accelerationY"),
@@ -69,7 +64,7 @@
 </script>
 
 <body onload="requestDeviceMotionPermission()">
-    <h1>RC029</h1>
+    <h1>RC_test</h1>
     <h2>分數: <span id="score">0</span></h2>
     <p>X 軸加速度: <span id="accelerationX">0</span> m/s²</p>
     <p>Y 軸加速度: <span id="accelerationY">0</span> m/s²</p>
@@ -81,6 +76,7 @@
             var mac_addr = 'rc029';
             var idf_name = 'Keypad1';
 
+            // 取得score數值
             const scoreElement = document.getElementById("score");
             var score = parseInt(scoreElement);
 
@@ -99,6 +95,7 @@
         // 初始化
         csmapi.set_endpoint('https://6.iottalk.tw');
         pushscore();
+
     </script>
 </body>
 </html>
