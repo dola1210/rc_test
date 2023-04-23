@@ -38,12 +38,11 @@
     let acceleration = { x: 0, y: 0, z: 0 };
     let cnt = 0;
     let level = 0;
-    function handleDeviceMotion(event) {
 
+    function handleDeviceMotion(event) {
         acceleration.x = event.accelerationIncludingGravity.x;
         acceleration.y = event.accelerationIncludingGravity.y;
         acceleration.z = event.accelerationIncludingGravity.z;
-
 
         var accelerationX = document.getElementById("accelerationX"),
             accelerationY = document.getElementById("accelerationY"),
@@ -70,6 +69,7 @@
         }
         cntElement.innerHTML = cnt.toFixed(2);
     }
+
     var myinterval = setInterval(updatelevel, 5000);
     function updatelevel(){
         const levelElement = document.getElementById("level");
@@ -117,7 +117,7 @@
                     return;
                 }
 
-                // 每 1 秒更新一次
+                // 每 5 秒更新一次
                 setTimeout(pushscore, 5000);
             });
         }
