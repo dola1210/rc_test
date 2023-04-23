@@ -36,11 +36,14 @@
     }
 
     let acceleration = { x: 0, y: 0, z: 0 };
+    let cnt = 0;
+    let level = 0;
+    function handleDeviceMotion(event) {
 
-    function handleDeviceMotion(event) {        
         acceleration.x = event.accelerationIncludingGravity.x;
         acceleration.y = event.accelerationIncludingGravity.y;
         acceleration.z = event.accelerationIncludingGravity.z;
+
 
         var accelerationX = document.getElementById("accelerationX"),
             accelerationY = document.getElementById("accelerationY"),
@@ -60,12 +63,43 @@
         );
 
         scoreElement.innerHTML = score.toFixed(2);
+
+        const cntElement = document.getElementById("count");
+        if (score >= 20){
+            cnt += 1;
+        }
+        cntElement.innerHTML = cnt.toFixed(2);
+    }
+    var myinterval = setInterval(updatelevel, 5000);
+    function updatelevel(){
+        const levelElement = document.getElementById("level");
+        if(cnt >= 15 && level < 5){
+            level += 1;
+            if(level == 5){
+                clearInterval(myinterval);
+                myinterval = setInterval(updatelevel, 10000);
+            }
+            else{
+                clearInterval(myinterval);
+                myinterval = setInterval(updatelevel, 5000);
+            }
+        }
+        else if (cnt <= 15 && level > 1 ) {
+            level -= 1;
+            clearInterval(myinterval);
+            myinterval = setInterval(updatelevel, 5000);
+        }
+        cnt = 0;
+        levelElement.innerHTML = level.toFixed(2);
     }
 </script>
 
 <body onload="requestDeviceMotionPermission()">
-    <h1>RC_test</h1>
+    <h1>CALL_test</h1>
+    <h2>USER ID: <span id="id">0</span></h2>
     <h2>分數: <span id="score">0</span></h2>
+    <h3>次數: <span id="count">0</span></h3>
+    <h4>等級: <span id="level">0</span></h4>
     <p>X 軸加速度: <span id="accelerationX">0</span> m/s²</p>
     <p>Y 軸加速度: <span id="accelerationY">0</span> m/s²</p>
     <p>Z 軸加速度: <span id="accelerationZ">0</span> m/s²</p>
@@ -73,29 +107,26 @@
     <script>
         function pushscore() {
             // 設定要 push 的裝置和資訊
-            var mac_addr = 'rc029';
-            var idf_name = 'Keypad1';
-
-            // 取得score數值
-            const score = Math.sqrt(
-                Math.pow(acceleration.x, 2) +
-                Math.pow(acceleration.y, 2) +
-                Math.pow(acceleration.z, 2)
-            );
+            var mac_addr = 'call029';
+            var idf_name = 'aud_test';
 
             // 呼叫 csmapi.js 的 push 函式
-            csmapi.push(mac_addr, idf_name, [score], function(data, error) {
+            csmapi.push(mac_addr, idf_name, [user_id, level], function(data, error) {
                 if (error) {
                     console.error('Failed to push score :', error);
                     return;
                 }
 
                 // 每 1 秒更新一次
-                setTimeout(pushscore, 2000);
+                setTimeout(pushscore, 5000);
             });
         }
 
         // 初始化
+        let user_id = Math.floor(Math.random() * 10000) + 1;
+        var id = document.getElementById("id");
+        id.innerHTML = user_id.toFixed(0);
+
         csmapi.set_endpoint('https://6.iottalk.tw');
         pushscore();
 

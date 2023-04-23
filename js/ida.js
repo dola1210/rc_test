@@ -1,12 +1,12 @@
 $(function () {
     csmapi.set_endpoint ('https://6.iottalk.tw');
     var profile = {
-        'dm_name': 'Remote_control',
-        'idf_list': [Keypad1],
+        'dm_name': 'dacall_test',
+        'idf_list': [aud_test],
         'odf_list': [],
     }
     
-    function Keypad1(){
+    function aud_test(){
         return 0;
     }
 

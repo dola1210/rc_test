@@ -9,7 +9,7 @@ const dai = function (profile, ida) {
                 .substring(1);
         }
         // return s() + s() + s();
-        return "rc029";
+        return "call029";
     })();
     console.log(mac_addr);
     if (profile.is_sim == undefined){

@@ -37,7 +37,7 @@ var dan = (function () {
         console.log("register");
 
         profile['d_name'] =
-                    "RC_029"
+                    "CALL_029"
                 // (Math.floor(Math.random() * 99)).toString() + '.' + profile['dm_name'];
                  //profile['dm_name'] +'-'+ _mac_addr.slice(_mac_addr.length - 4);
         _profile = profile;
