@@ -108,8 +108,21 @@
 </script>
 
 <body>
-    <button onclick="requestDeviceMotionPermission()">索取加速度感測器權限</button>
+    <div
+        id="g_id_onload"
+        data-client_id="574577788873-rgrojpv60ea0h4imtl3pdpg0m7q8m7g3.apps.googleusercontent.com"
+        data-callback="onSignIn1"
+    ></div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    目前狀態：
+
+    <span id="GOOGLE_STATUS_1"></span>
     
+    <br>
+    <button onclick="requestDeviceMotionPermission()">索取加速度感測器權限</button>
+    <br>
+
     <h1>CALL_test</h1>
     <h2>USER ID: <span id="id">0</span></h2>
     <h2>分數: <span id="score">0</span></h2>
@@ -120,13 +133,40 @@
     <p>Z 軸加速度: <span id="accelerationZ">0</span> m/s²</p>
     
     <script>
+        var uuid = 0;
+        var name = '';
+        function onSignIn1(response) {
+            var credential = response.credential,
+            profile = JSON.parse(
+                decodeURIComponent(
+                escape(
+                    window.atob(
+                    credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")
+                    )
+                )
+                )
+            ), // 對 JWT 進行解碼
+            target = document.getElementById("GOOGLE_STATUS_1"),
+            html = "";
+
+            html += "ID: " + profile.sub + "<br/>";
+            html += "會員暱稱： " + profile.name + "<br/>";
+            html += "會員頭像：" + profile.picture + "<br/>";
+            html += "會員 email：" + profile.email + "<br/>";
+            target.innerHTML = html;
+            uuid = profile.sub;
+            name = profile.name;
+            pushscore();
+
+        }
+
         function pushscore() {
             // 設定要 push 的裝置和資訊
             var mac_addr = 'call029';
             var idf_name = 'aud_test';
 
             // 呼叫 csmapi.js 的 push 函式
-            csmapi.push(mac_addr, idf_name, [user_id, level], function(data, error) {
+            csmapi.push(mac_addr, idf_name, [uuid, name, level], function(data, error) {
                 if (error) {
                     console.error('Failed to push score :', error);
                     return;
@@ -138,12 +178,11 @@
         }
 
         // 初始化
-        let user_id = Math.floor(Math.random() * 10000) + 1;
+        var user_id = Math.floor(Math.random() * 10000) + 1;
         var id = document.getElementById("id");
-        id.innerHTML = user_id.toFixed(0);
+        id.innerHTML = user_id;
 
         csmapi.set_endpoint('https://6.iottalk.tw');
-        pushscore();
 
     </script>
 </body>
